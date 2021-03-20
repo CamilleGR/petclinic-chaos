@@ -1,9 +1,6 @@
-
-
 # Chao à la clinique vétérinaire
 
-Ce dépôt contient un simple déploiement de l'application Petclinic sur Kubernetes. A cela on ajoute du chaos engineering avec Chaos Mesh.
-
+Ce dépôt contient un simple déploiement de l'application Petclinic sur Kubernetes. A cela on ajoute du chaos engineering avec Chaos Mesh. Le déploiement n'a été été testé que sur minikube.
 
 ## Dockerfile
 
