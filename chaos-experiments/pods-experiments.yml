@@ -1,0 +1,21 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: kill-app-pods
+  namespace: petclinic
+  labels: null
+  annotations: null
+spec:
+  selector:
+    namespaces:
+      - petclinic
+    labelSelectors:
+      app: app
+  scheduler:
+    cron: '*/5 * * * *'
+  action: pod-failure
+  mode: one
+  value: ''
+  duration: 30s
+  containerName: ''
+  gracePeriod: 0

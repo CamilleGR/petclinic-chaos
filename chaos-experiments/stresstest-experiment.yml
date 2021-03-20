@@ -1,0 +1,25 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: stresstest-experiment
+  namespace: petclinic
+  labels: null
+  annotations: null
+spec:
+  mode: one
+  value: ''
+  selector:
+    namespaces:
+      - petclinic
+    labelSelectors:
+      app: mariadb
+  stressors:
+    memory:
+      workers: 2
+    cpu:
+      workers: 2
+      load: 75
+  containerName: ''
+  duration: 15s
+  scheduler:
+    cron: '* * * * *'
