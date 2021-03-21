@@ -6,7 +6,7 @@ metadata:
   labels:
     app: app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: app
@@ -19,7 +19,20 @@ spec:
       - name: app
         image: quay.io/camillegr/petclinic:latest
         ports:
-        - containerPort: 3306
+        - name: http-port
+          containerPort: 8080
         env:
         - name: MYSQL_URL
           value: jdbc:mysql://mariadb-service.petclinic.svc/petclinic
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http-port
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http-port
+          initialDelaySeconds: 60
+          periodSeconds: 30
