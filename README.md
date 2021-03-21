@@ -1,6 +1,6 @@
 # Chao à la clinique vétérinaire
 
-Ce dépôt contient un simple déploiement de l'application Petclinic sur Kubernetes. A cela on ajoute du chaos engineering avec Chaos Mesh. Le déploiement n'a été été testé que sur minikube.
+Ce dépôt contient un simple déploiement de l'application Petclinic (Spring-Boot) sur Kubernetes. A cela on ajoute du chaos engineering avec Chaos Mesh. Le déploiement n'a été été testé que sur minikube.
 
 ## Dockerfile
 
@@ -18,10 +18,28 @@ Chaos-Mesh utilise les CRD pour créer des experimentations.
 
 Pour lancer Petclinic :
 
-`./start-petclinic.sh`
+```
+./start-petclinic.sh
+```
 
 qui va :
 - Créer les déploiements/services de petclinic.
 - Installer Helm sur minikube.
 - Installer Chaos-Mesh.
 - Lancer les dahsboards minikube et chaos-mesh.
+
+## Monitoring
+
+Pour faire simple, on utilisera le script monitor/mainpage-monitor.py pour vérifier la disponibilité du site :
+
+```
+python mainpage-monitor.py -u http://192.168.99.102:30000/
+```
+
+Avec une supression de pods toute les deux minutes on obtient cette sortie :
+
+![Sortie du monitor](images/monitor.png)
+
+chaos-mesh fournit également un tableau de bord pour suivre les expérimentations :
+
+![Dashboards Chaos-Mesh](images/chaosmesh.png)
