@@ -10,6 +10,7 @@ RUN git clone https://github.com/spring-projects/spring-petclinic.git /app/petcl
 WORKDIR /app/petclinic
 RUN sed -ic 's/database=h2/database=mysql/g' src/main/resources/application.properties
 RUN echo 'spring.profiles.active=mysql' >> src/main/resources/application.properties
+RUN ./mvnw clean package -Dmaven.test.skip=true
 # Expose App on port 8080
 EXPOSE 8080
 
