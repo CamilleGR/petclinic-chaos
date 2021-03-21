@@ -7,9 +7,8 @@ kubectl create -f services/
 
 
 # INSTALL HELM
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod +x get_helm
-./get_helm
+curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
 # INSTALL Chaos Mesh
 curl -sSL https://mirrors.chaos-mesh.org/v1.1.2/install.sh | bash
 
