@@ -33,7 +33,9 @@ qui va :
 Pour faire simple, on utilisera le script monitor/mainpage-monitor.py pour vérifier la disponibilité du site :
 
 ```
-python mainpage-monitor.py -u http://192.168.99.102:30000/
+cd monitor/
+go build
+./monitor -u $(minikube service app-service -n petclinic --url) -p 5
 ```
 
 Avec une supression de pods toute les deux minutes on obtient cette sortie :
