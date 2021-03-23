@@ -16,6 +16,10 @@ Chaos-Mesh utilise les CRD pour créer des experimentations.
 
 ## Lancer Petclinic et Chaos-Mesh
 
+
+![Screenshot de Petclinic](images/petclinic.png)
+
+
 Pour lancer Petclinic :
 
 ```
