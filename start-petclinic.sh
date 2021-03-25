@@ -12,7 +12,10 @@ kubectl create -f services/mariadb-service.yaml
 curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
 # INSTALL Chaos Mesh
-curl -sSL https://mirrors.chaos-mesh.org/v1.1.2/install.sh | bash
+kubectl create ns litmus
+helm install chaos litmuschaos/litmus --namespace=litmus
+
+
 
 
 # Start and show dashboards for Chaos & Cluster

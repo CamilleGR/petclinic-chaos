@@ -1,21 +1,36 @@
-apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
 metadata:
-  name: kill-app-pods
+  name: petclinic-chaos
   namespace: petclinic
-  labels: null
-  annotations: null
 spec:
-  selector:
-    namespaces:
-      - petclinic
-    labelSelectors:
-      app: app
-  scheduler:
-    cron: '*/5 * * * *'
-  action: pod-failure
-  mode: one
-  value: ''
-  duration: 30s
-  containerName: ''
-  gracePeriod: 0
+  appinfo:
+    appns: 'petclinic'
+    applabel: 'app=app'
+    appkind: 'deployment'
+  # It can be true/false
+  annotationCheck: 'true'
+  # It can be active/stop
+  engineState: 'active'
+  #ex. values: ns1:name=percona,ns2:run=nginx
+  auxiliaryAppInfo: 'ns:name=petclinic'
+  chaosServiceAccount: pod-delete-sa
+  monitoring: false
+  # It can be delete/retain
+  jobCleanUpPolicy: 'delete'
+  experiments:
+    - name: pod-delete
+      spec:
+        components:
+          env:
+            # set chaos duration (in sec) as desired
+            - name: TOTAL_CHAOS_DURATION
+              value: '10'
+
+            # set chaos interval (in sec) as desired
+            - name: CHAOS_INTERVAL
+              value: '600'
+
+            # pod failures without '--force' & default terminationGracePeriodSeconds
+            - name: FORCE
+              value: 'false'
